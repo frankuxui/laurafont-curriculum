@@ -1,0 +1,171 @@
+---
+import { contact, links } from "@/data";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const themes = ["new-york", "tokyo", "paris", "london"];
+---
+
+<button
+  data-toggle="drawer-menu-theme"
+  class="inline-flex items-center justify-center fixed z-50 bottom-8 right-8 sm:bottom-14 sm:right-14 rounded-full w-12 h-12 cursor-pointer transition-all duration-300 bg-foreground text-background shadow-2xl drop-shadow-2xl"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 32 32"
+    ><circle cx="10" cy="12" r="2" fill="currentColor"></circle><circle cx="16" cy="9" r="2" fill="currentColor"></circle><circle cx="22" cy="12" r="2" fill="currentColor"
+    ></circle><circle cx="23" cy="18" r="2" fill="currentColor"></circle><circle cx="19" cy="23" r="2" fill="currentColor"></circle><path
+      fill="currentColor"
+      d="M16.54 2A14 14 0 0 0 2 16a4.82 4.82 0 0 0 6.09 4.65l1.12-.31a3 3 0 0 1 3.79 2.9V27a3 3 0 0 0 3 3a14 14 0 0 0 14-14.54A14.05 14.05 0 0 0 16.54 2m8.11 22.31A11.93 11.93 0 0 1 16 28a1 1 0 0 1-1-1v-3.76a5 5 0 0 0-5-5a5 5 0 0 0-1.33.18l-1.12.31A2.82 2.82 0 0 1 4 16A12 12 0 0 1 16.47 4A12.18 12.18 0 0 1 28 15.53a11.9 11.9 0 0 1-3.35 8.79Z"
+    ></path></svg
+  >
+</button>
+<div class="fixed top-0 left-0 w-full h-full hidden z-20" id="drawer-menu-theme-sector">
+  <div data-toggle="drawer-menu-theme" class="absolute top-0 left-0 w-full h-full bg-black/80"></div>
+  <div class="absolute top-0 w-full h-full left-0 max-w-xs overflow-hidden bg-background text-foreground border-r border-border/10" id="drawer-menu-theme-content">
+    <div class="flex items-start flex-col overflow-hidden h-full w-full">
+      <header class="w-full sticky top-0 flex-none flex items-center justify-between px-10 h-20 border-b border-border bg-foreground/3">
+        <h2 class="text-xl font-bold uppercase">Menu</h2>
+        <button data-toggle="drawer-menu-theme" class="relative inline-flex rounded-full items-center justify-center w-10 h-10 cursor-pointer bg-white text-black">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            ><path
+              fill="none"
+              stroke="currentColor"
+              stroke-dasharray="12"
+              stroke-dashoffset="12"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 12l7 7M12 12l-7 -7M12 12l-7 7M12 12l7 -7"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="12;0"></animate></path
+            ></svg
+          >
+        </button>
+      </header>
+      <section class="overflow-auto w-full p-10">
+        <div class="w-full flex flex-col gap-8">
+          <h2 class="text-xl font-bold uppercase">Temas</h2>
+          <p class="text-sm text-foreground/70">Selecciona un tema para cambiar el aspecto visual de la aplicación.</p>
+          <div class="w-full grid gap-2">
+            <button
+              class="w-full rounded-lg border p-6 cursor-pointer transition-colors duration-300 border-foreground/10 hover:bg-foreground/2 ring-2 ring-transparent focus:ring-foreground/50 focus:bg-foreground/5 data-[active='true']:ring-foreground/50 data-[active='true']:bg-foreground/5"
+              data-theme-color="default"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start gap-2">
+                  <span class="w-4 h-4 rounded-full bg-foreground/20"></span>
+                  <span class="w-4 h-4 rounded-full bg-foreground/20"></span>
+                  <span class="w-4 h-4 rounded-full bg-foreground/20"></span>
+                </div>
+                <div class="w-full max-w-20 h-4 rounded-full bg-foreground/20"></div>
+              </div>
+            </button>
+            {
+              themes.map((theme) => (
+                <button
+                  class="w-full rounded-lg p-6 cursor-pointer transition-colors duration-300 bg-hero-foreground/10 hover:bg-hero-foreground/20 ring-2 ring-transparent focus:ring-hero-foreground focus:bg-hero-foreground/40 data-[active='true']:ring-hero-foreground data-[active='true']:bg-hero-foreground/40"
+                  data-theme-color={theme}
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-start gap-2">
+                      <span class="w-4 h-4 rounded-full bg-hero-foreground/50" />
+                      <span class="w-4 h-4 rounded-full bg-hero-foreground/50" />
+                      <span class="w-4 h-4 rounded-full bg-hero-foreground/50" />
+                    </div>
+                    <div class="w-full max-w-20 h-4 rounded-full bg-hero-foreground/50" />
+                  </div>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+      <section class="flex-none p-10 flex items-center justify-between gap-10 w-full mt-auto border-t border-border">
+        <span class="text-sm font-medium"> Cambiar modo <br /> de tema </span>
+        <ThemeToggle />
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { Drawer } from "../scripts/drawer.ts";
+
+  console.log("MobileMenu component loaded");
+
+  const DrawerTrigger = document.querySelectorAll("[data-toggle='drawer-menu-theme']") as NodeListOf<HTMLElement>;
+  const themeButtons = document.querySelectorAll("[data-theme-color]") as NodeListOf<HTMLElement>;
+  const body = document.body;
+
+  // --- INIT DRAWER ---
+  document.addEventListener("DOMContentLoaded", () => {
+    const drawerMenuMobile = new Drawer({
+      trigger: "[data-toggle='drawer-menu-theme']",
+      wrapper: "#drawer-menu-theme-sector",
+      content: "#drawer-menu-theme-content",
+      orientation: "left",
+    });
+
+    drawerMenuMobile.init();
+
+    drawerMenuMobile.on("open", () => {
+      DrawerTrigger.forEach((trigger) => trigger.setAttribute("data-expanded", "true"));
+    });
+
+    drawerMenuMobile.on("close", () => {
+      DrawerTrigger.forEach((trigger) => trigger.setAttribute("data-expanded", "false"));
+    });
+
+    window.addEventListener("beforeunload", () => drawerMenuMobile.destroy());
+  });
+
+  // --- THEME HANDLER ---
+  function setTheme(theme: string) {
+    if (theme === "default") {
+      localStorage.removeItem("theme-color");
+      body.removeAttribute("data-theme-color");
+    } else {
+      localStorage.setItem("theme-color", theme);
+      body.setAttribute("data-theme-color", theme);
+    }
+
+    themeButtons.forEach((button) => {
+      const btnTheme = button.getAttribute("data-theme-color");
+      if ((theme === "default" && btnTheme === "default") || btnTheme === theme) {
+        button.setAttribute("data-active", "true");
+      } else {
+        button.removeAttribute("data-active");
+      }
+    });
+  }
+
+  themeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const theme = button.getAttribute("data-theme-color");
+      if (theme) setTheme(theme);
+    });
+  });
+
+  // --- LOAD SAVED THEME ON PAGE LOAD ---
+  const savedTheme = localStorage.getItem("theme-color");
+
+  if (!savedTheme || savedTheme === "default") {
+    body.removeAttribute("data-theme-color");
+    themeButtons.forEach((button) => {
+      const theme = button.getAttribute("data-theme");
+      if (theme === "default") {
+        button.setAttribute("data-active", "true");
+      } else {
+        button.removeAttribute("data-active");
+      }
+    });
+  } else {
+    body.setAttribute("data-theme-color", savedTheme);
+    themeButtons.forEach((button) => {
+      const theme = button.getAttribute("data-theme-color");
+      if (theme === savedTheme) {
+        button.setAttribute("data-active", "true");
+      } else {
+        button.removeAttribute("data-active");
+      }
+    });
+  }
+
+  console.log(`Tema cargado desde localStorage: ${savedTheme ?? "default"}`);
+</script>

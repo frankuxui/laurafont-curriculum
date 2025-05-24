@@ -1,0 +1,33 @@
+---
+import Signature from "./Signature.astro";
+---
+
+<header
+  data-sticky-header
+  class="fixed z-20 top-0 w-full px-10 h-20 bg-black text-white -translate-y-full data-[visible]:translate-y-0 transition-transform duration-300 ease-in-out"
+>
+  <div class="flex items-center justify-between w-full h-full max-w-7xl mx-auto">
+    <span class="font-bold font-barlow text-2xl uppercase text-hero-foreground">Frank Esteban</span>
+    <div class="flex items-center justify-end gap-8">
+      <figure class="w-full max-w-20">
+        <Signature />
+      </figure>
+      <button
+        data-toggle="drawer-menu"
+        data-expanded="false"
+        class="group relative rounded-full inline-flex md:hidden items-center justify-center w-10 h-10 cursor-pointer bg-white text-black"
+      >
+        <div class="absolute top-0 left-0 w-full h-full inline-flex items-center justify-center flex-col gap-1">
+          <span
+            class='h-0.5 w-5 bg-current rounded-full transition-transform transform duration-300 group-data-[expanded="true"]:rotate-45 group-data-[expanded="true"]:translate-y-1 group-data-[expanded="false"]:translate-y-0'
+            ,></span>
+          <span class="h-0.5 w-5 bg-current rounded-full transition-transform transform duration-300 group-data-[expanded='true']:scale-0 group-data-[expanded='false']:scale-100"
+          ></span>
+          <span
+            class="h-0.5 w-5 bg-current rounded-full transition-transform transform duration-300 group-data-[expanded='true']:-rotate-45 group-data-[expanded='true']:-translate-y-2 group-data-[expanded='false']:translate-y-0"
+          ></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>

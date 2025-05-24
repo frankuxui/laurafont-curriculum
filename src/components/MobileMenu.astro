@@ -1,0 +1,97 @@
+---
+import { contact, links } from "@/data";
+---
+
+<div class="fixed top-0 left-0 w-full h-full hidden z-20" id="drawer-menu-wrapper">
+  <div data-toggle="drawer-menu" class="absolute top-0 left-0 w-full h-full bg-black/80"></div>
+  <div class="absolute top-0 w-full h-full left-0 max-w-xs overflow-hidden bg-aside-background text-aside-foreground" id="drawer-menu-content">
+    <div class="flex items-start flex-col overflow-hidden h-full w-full">
+      <header class="w-full sticky top-0 flex-none flex items-center justify-between px-10 h-20 bg-aside-foreground/5">
+        <h2 class="text-3xl font-barlow font-medium uppercase">Menu</h2>
+        <button data-toggle="drawer-menu" class="relative inline-flex rounded-full items-center justify-center w-10 h-10 cursor-pointer bg-white text-black">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            ><path
+              fill="none"
+              stroke="currentColor"
+              stroke-dasharray="12"
+              stroke-dashoffset="12"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 12l7 7M12 12l-7 -7M12 12l-7 7M12 12l7 -7"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="12;0"></animate></path
+            ></svg
+          >
+        </button>
+      </header>
+      <section class="overflow-auto w-full p-10">
+        <div class="w-full flex flex-col gap-8">
+          <h2 class="text-2xl font-barlow font-semibold uppercase">contacto</h2>
+          <ul class="w-full flex flex-col items-start gap-4">
+            {
+              contact.map((link) => (
+                <li>
+                  <a href={link.url} class="flex items-center justify-start gap-2 lg:gap-4 text-base lg:text-lg underline">
+                    <span set:html={link.icon} />
+                    <span>{link.name}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <!-- <h2 class="text-2xl font-barlow font-semibold uppercase">Enlaces</h2>
+          <ul class="w-full flex flex-col items-start gap-4">
+            {
+              links.map((link) => (
+                <li>
+                  <a href={link.url} class="flex items-center justify-start gap-2 lg:gap-4 text-base lg:text-lg underline">
+                    <span set:html={link.icon} />
+                    <span>{link.name}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul> -->
+          <h2 class="text-2xl font-barlow font-semibold uppercase">Idiomas</h2>
+          <section class="w-full flex items-start flex-col gap-2">
+            <h3 class="text-base sm:text-lg">Español</h3>
+            <p class="text-sm text-background/60">Competencia Nativa, dominio completo en conversación y escritura.</p>
+          </section>
+          <section class="w-full flex items-start flex-col gap-2">
+            <h3 class="text-base sm:text-lg">Ingles</h3>
+            <p class="text-sm text-background/60">Competencia Profesional, capacidad para comunicarse eficazmente en entornos laborales y académicos.</p>
+          </section>
+          <h2 class="text-2xl font-barlow font-semibold uppercase">Empresa</h2>
+          <section class="w-full flex items-start flex-col gap-2">
+            <h3 class="text-base sm:text-lg">Grupoliva motor</h3>
+            <p class="text-sm text-background/60">Actualmente desempeño el cargo de Frontend Developer.</p>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { Drawer } from "../scripts/drawer.ts";
+
+  console.log("MobileMenu component loaded");
+
+  const DrawerTrigger = document.querySelectorAll("[data-toggle='drawer-menu']") as NodeListOf<HTMLButtonElement>;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const drawerMenuMobile = new Drawer({
+      trigger: "[data-toggle='drawer-menu']",
+      wrapper: "#drawer-menu-wrapper",
+      content: "#drawer-menu-content",
+      orientation: "left",
+    });
+    drawerMenuMobile.init();
+    drawerMenuMobile.on("open", () => {
+      DrawerTrigger.forEach((trigger) => trigger.setAttribute("data-expanded", "true"));
+    });
+    drawerMenuMobile.on("close", () => {
+      DrawerTrigger.forEach((trigger) => trigger.setAttribute("data-expanded", "false"));
+    });
+    window.addEventListener("beforeunload", () => drawerMenuMobile.destroy());
+  });
+</script>

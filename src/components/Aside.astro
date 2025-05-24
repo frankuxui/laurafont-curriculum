@@ -1,0 +1,48 @@
+---
+import { contact, links } from "@/data/index.ts";
+---
+
+<aside class="hidden md:block col-span-4 md:pt-12 px-8 lg:px-16 lg:pt-16 bg-aside-background text-aside-foreground">
+  <div class="w-full flex flex-col gap-8">
+    <h2 class="text-3xl font-barlow font-medium uppercase">contacto</h2>
+    <ul class="w-full flex flex-col items-start gap-4">
+      {
+        contact.map((link) => (
+          <li>
+            <a href={link.url} class="flex items-center justify-start gap-2 lg:gap-4 text-base lg:text-lg underline">
+              <span set:html={link.icon} />
+              <span>{link.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <!-- <h2 class="text-3xl font-barlow font-medium uppercase">Enlaces</h2>
+    <ul class="w-full flex flex-col items-start gap-4">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.url} class="flex items-center justify-start gap-2 lg:gap-4 text-base lg:text-lg underline">
+              <span set:html={link.icon} />
+              <span>{link.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul> -->
+    <h2 class="text-3xl font-barlow font-medium uppercase">Idiomas</h2>
+    <section class="w-full flex items-start flex-col gap-2">
+      <h3 class="text-base sm:text-lg">Español</h3>
+      <p class="text-sm text-background/60">Competencia Nativa, dominio completo en conversación y escritura.</p>
+    </section>
+    <section class="w-full flex items-start flex-col gap-2">
+      <h3 class="text-base sm:text-lg">Ingles</h3>
+      <p class="text-sm text-background/60">Competencia Profesional, capacidad para comunicarse eficazmente en entornos laborales y académicos.</p>
+    </section>
+    <h2 class="text-3xl font-barlow font-medium uppercase">Empresa</h2>
+    <section class="w-full flex items-start flex-col gap-2">
+      <h3 class="text-base sm:text-lg">Grupoliva motor</h3>
+      <p class="text-sm text-background/60">Actualmente desempeño el cargo de Frontend Developer.</p>
+    </section>
+  </div>
+</aside>

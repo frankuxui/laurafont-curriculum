@@ -1,0 +1,142 @@
+<button
+  aria-label="Switch theme"
+  data-toggle="theme"
+  class="group rounded-full flex-none w-12 h-12 inline-flex items-center justify-center overflow-hidden cursor-pointer bg-foreground/5 hover:bg-foreground/8 focus:bg-foreground/10"
+>
+  <span class="sr-only">Switch theme</span>
+  <div class="relative h-8 w-8">
+    <div data-theme-icon="dark" class="theme-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+        ><path
+          fill="currentColor"
+          d="M12.09 20.66a9 9 0 0 1-1.09-.07A8.8 8.8 0 0 1 3.41 13a8.71 8.71 0 0 1 6.83-9.67a1.23 1.23 0 0 1 1.27.48a1.27 1.27 0 0 1 .05 1.4a5.3 5.3 0 0 0-.66 3.47a5.24 5.24 0 0 0 4.38 4.38a5.2 5.2 0 0 0 3.47-.67a1.27 1.27 0 0 1 1.4.07a1.21 1.21 0 0 1 .48 1.26a8.7 8.7 0 0 1-8.54 6.94M10 5a7.25 7.25 0 1 0 9 9a6.74 6.74 0 0 1-9.61-5A6.75 6.75 0 0 1 10 5"
+        ></path></svg
+      >
+      <!-- <span class="material-symbols-rounded material-symbols-lg material-symbols-weight-300">dark_mode</span> -->
+    </div>
+    <div data-theme-icon="light" class="theme-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+        ><path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M17 12a5 5 0 1 1-10 0a5 5 0 0 1 10 0M12 2v1.5m0 17V22m7.07-2.929l-1.06-1.06M5.99 5.989L4.928 4.93M22 12h-1.5m-17 0H2m17.071-7.071l-1.06 1.06M5.99 18.011l-1.06 1.06"
+          color="currentColor"></path></svg
+      >
+      <!-- <span class="material-symbols-rounded material-symbols-lg material-symbols-weight-300">light_mode</span> -->
+    </div>
+    <div data-theme-icon="system" class="theme-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"
+        ><path
+          fill="currentColor"
+          d="M12.25 8A4.25 4.25 0 0 0 8 12.25v15.5A4.25 4.25 0 0 0 12.25 32h23.5A4.25 4.25 0 0 0 40 27.75v-15.5A4.25 4.25 0 0 0 35.75 8zm-1.75 4.25c0-.966.784-1.75 1.75-1.75h23.5c.967 0 1.75.784 1.75 1.75v15.5a1.75 1.75 0 0 1-1.75 1.75h-23.5a1.75 1.75 0 0 1-1.75-1.75zM5.25 35.5a1.25 1.25 0 1 0 0 2.5h37.5a1.25 1.25 0 1 0 0-2.5z"
+        ></path></svg
+      >
+      <!-- <span class="material-symbols-rounded material-symbols-lg material-symbols-weight-300">computer</span> -->
+    </div>
+  </div>
+</button>
+
+<style>
+  .theme-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 100px;
+    transition:
+      transform 0.7s,
+      top 0.7s;
+  }
+  .rotate-0 {
+    transform: rotate(0deg);
+  }
+  .rotate-90 {
+    transform: rotate(90deg);
+  }
+  .-rotate-90 {
+    transform: rotate(-90deg);
+  }
+  .top-0 {
+    top: 0;
+  }
+  .top-24 {
+    top: 6rem;
+  }
+</style>
+
+<script>
+  type ThemeType = "dark" | "light" | "system";
+
+  function initTheme() {
+    const toggleBtn = document.querySelector('[data-toggle="theme"]') as HTMLButtonElement;
+
+    const darkIcon = toggleBtn.querySelector('[data-theme-icon="dark"]') as HTMLElement;
+    const lightIcon = toggleBtn.querySelector('[data-theme-icon="light"]') as HTMLElement;
+    const systemIcon = toggleBtn.querySelector('[data-theme-icon="system"]') as HTMLElement;
+
+    const icons = { dark: darkIcon, light: lightIcon, system: systemIcon };
+
+    const theme: {
+      getTheme: () => ThemeType;
+      setTheme: (t: ThemeType) => void;
+    } = window.theme || {
+      getTheme: () => "system",
+      setTheme: (t) => {
+        document.documentElement.dataset.theme = t;
+        document.documentElement.classList.toggle("dark", t === "dark");
+      },
+    };
+
+    const clearClasses = () => {
+      Object.values(icons).forEach((icon) => {
+        icon.classList.remove("rotate-0", "rotate-90", "-rotate-90", "top-0", "top-24");
+      });
+    };
+
+    const applyIconState = (mode: ThemeType) => {
+      clearClasses();
+
+      if (mode === "dark") {
+        icons.dark.classList.add("rotate-0");
+        icons.light.classList.add("-rotate-90");
+        icons.system.classList.add("top-24");
+      } else if (mode === "light") {
+        icons.dark.classList.add("rotate-90");
+        icons.light.classList.add("rotate-0");
+        icons.system.classList.add("top-24");
+      } else {
+        icons.dark.classList.add("rotate-90");
+        icons.light.classList.add("-rotate-90");
+        icons.system.classList.add("top-0");
+      }
+    };
+
+    const cycleTheme = () => {
+      const current = theme.getTheme();
+      const next: ThemeType = current === "dark" ? "light" : current === "light" ? "system" : "dark";
+
+      theme.setTheme(next);
+      applyIconState(next);
+
+      document.dispatchEvent(new CustomEvent("theme-changed", { detail: { theme: next } }));
+    };
+
+    toggleBtn.addEventListener("click", cycleTheme);
+
+    document.addEventListener("astro:page-load", () => {
+      applyIconState(theme.getTheme());
+    });
+
+    // Init on first load
+    applyIconState(theme.getTheme());
+  }
+
+  document.addEventListener("DOMContentLoaded", initTheme);
+  document.addEventListener("astro:after-swap", initTheme);
+  document.addEventListener("astro:before-swap", initTheme);
+  document.addEventListener("astro:page-load", initTheme);
+</script>

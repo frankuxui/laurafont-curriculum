@@ -1,0 +1,48 @@
+---
+const BASE_URL = import.meta.env.MODE === "production" ? import.meta.env.SITE : Astro.url;
+const ogImage = `${BASE_URL}/imagen_de_opengraph_frankuxui_frontend_developer.webp`;
+const description = "Curriculum de Frankuxui, Frontend Developer. Conoce más sobre mí y mis habilidades en el desarrollo web.";
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="57x57" href=`${BASE_URL}/apple-touch-icon-57x57.png` />
+<link rel="apple-touch-icon" sizes="72x72" href=`${BASE_URL}/apple-touch-icon-72x72.png` />
+<link rel="apple-touch-icon" sizes="76x76" href=`${BASE_URL}/apple-touch-icon-76x76.png` />
+<link rel="apple-touch-icon" sizes="114x114" href=`${BASE_URL}/apple-touch-icon-114x114.png` />
+<link rel="apple-touch-icon" sizes="120x120" href=`${BASE_URL}/apple-touch-icon-120x120.png` />
+<link rel="apple-touch-icon" sizes="144x144" href=`${BASE_URL}/apple-touch-icon-144x144.png` />
+<link rel="apple-touch-icon" sizes="152x152" href=`${BASE_URL}/apple-touch-icon-152x152.png` />
+<link rel="apple-touch-icon" sizes="180x180" href=`${BASE_URL}/apple-touch-icon-180x180.png` />
+<link rel="icon" type="image/png" sizes="192x192" href=`${BASE_URL}/android-chrome-192x192.png` />
+<link rel="icon" type="image/png" sizes="512x512" href=`${BASE_URL}/android-chrome-512x512.png` />
+<link rel="sitemap" href=`${BASE_URL}/sitemap-index.xml` />
+<link rel="alternate" type="application/rss+xml" title="Frankuxui - Curriculum" href={new URL("rss.xml", Astro.site)} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={Astro.url} />
+
+<!-- Primary Meta Tags -->
+<title>Frankuxui - Frontend Developer | Curriculum</title>
+<meta name="title" content="Frankuxui - Curriculum" />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content="Frankuxui - Curriculum" />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content="Frankuxui - Curriculum" />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />

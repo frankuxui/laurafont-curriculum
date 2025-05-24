@@ -1,0 +1,147 @@
+---
+import MobileMenu from "@/components/MobileMenu.astro";
+import BaseHead from "../components/BaseHead.astro";
+import "../styles/global.css";
+import ThemeAside from "@/components/ThemeAside.astro";
+import ThemeManager from "@/components/ThemeManager.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head class="motion-safe:scroll-smooth">
+    <BaseHead />
+  </head>
+  <body>
+    <MobileMenu />
+    <ThemeManager defaultTheme="light" />
+    <ThemeAside />
+    <slot />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --animate-slide-in-top: slide-in-top 0.25s ease-out forwards;
+    --animate-slide-out-top: slide-out-top 0.25s ease-in forwards;
+    --animate-slide-in-bottom: slide-in-bottom 0.25s ease-out forwards;
+    --animate-slide-out-bottom: slide-out-bottom 0.25s ease-in forwards;
+    --animate-slide-in-left: slide-in-left 0.25s ease-out forwards;
+    --animate-slide-out-left: slide-out-left 0.25s ease-in forwards;
+    --animate-slide-in-right: slide-in-right 0.25s ease-out forwards;
+    --animate-slide-out-right: slide-out-right 0.25s ease-in forwards;
+  }
+
+  .animate-slide-in-top {
+    animation: var(--animate-slide-in-top);
+  }
+  .animate-slide-out-top {
+    animation: var(--animate-slide-out-top);
+  }
+  .animate-slide-in-bottom {
+    animation: var(--animate-slide-in-bottom);
+  }
+  .animate-slide-out-bottom {
+    animation: var(--animate-slide-out-bottom);
+  }
+  .animate-slide-in-left {
+    animation: var(--animate-slide-in-left);
+  }
+  .animate-slide-out-left {
+    animation: var(--animate-slide-out-left);
+  }
+  .animate-slide-in-right {
+    animation: var(--animate-slide-in-right);
+  }
+  .animate-slide-out-right {
+    animation: var(--animate-slide-out-right);
+  }
+
+  /** Drawer **/
+
+  /* Bottom */
+  @keyframes slide-in-bottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-out-bottom {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+
+  /* Top */
+  @keyframes slide-in-top {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-out-top {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  /* Left */
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Right */
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out-right {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+</style>

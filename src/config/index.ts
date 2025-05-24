@@ -1,0 +1,1 @@
+export const BASE_URL = import.meta.env.MODE === "production" ? import.meta.env.SITE : "http://localhost:4333/laurafont-curriculum"
