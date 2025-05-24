@@ -1,7 +1,8 @@
 ---
 const BASE_URL = import.meta.env.MODE === "production" ? import.meta.env.SITE : Astro.url;
 const ogImage = `${BASE_URL}/imagen_de_opengraph_frankuxui_frontend_developer.webp`;
-const description = "Curriculum de Frankuxui, Frontend Developer. Conoce más sobre mí y mis habilidades en el desarrollo web.";
+const description =
+  "Curriculum de Laura Font, sommelier profesional con experiencia en el sector de la hostelería y la restauración, especializada en vinos y bebidas espirituosas. Con una sólida formación y habilidades excepcionales en cata, maridaje y servicio al cliente";
 ---
 
 <!-- Global Metadata -->
@@ -22,27 +23,27 @@ const description = "Curriculum de Frankuxui, Frontend Developer. Conoce más so
 <link rel="icon" type="image/png" sizes="192x192" href=`${BASE_URL}/android-chrome-192x192.png` />
 <link rel="icon" type="image/png" sizes="512x512" href=`${BASE_URL}/android-chrome-512x512.png` />
 <link rel="sitemap" href=`${BASE_URL}/sitemap-index.xml` />
-<link rel="alternate" type="application/rss+xml" title="Frankuxui - Curriculum" href={new URL("rss.xml", Astro.site)} />
+<link rel="alternate" type="application/rss+xml" title="Laura Font - Curriculum" href={new URL("rss.xml", Astro.site)} />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={Astro.url} />
 
 <!-- Primary Meta Tags -->
-<title>Frankuxui - Frontend Developer | Curriculum</title>
-<meta name="title" content="Frankuxui - Curriculum" />
+<title>Laura font - Sommelier | Curriculum</title>
+<meta name="title" content="Laura Font - Curriculum" />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content="Frankuxui - Curriculum" />
+<meta property="og:title" content="Laura Font - Curriculum" />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content="Frankuxui - Curriculum" />
+<meta property="twitter:title" content="Laura Font - Curriculum" />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImage} />
